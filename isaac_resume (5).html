@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isaac Jones - Resume</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #1e3a8a 75%, #000000 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            color: #ffffff;
+            cursor: none;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 117, 24, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 212, 255, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                /* Gear patterns */
+                radial-gradient(circle at 15% 25%, transparent 12px, rgba(0, 212, 255, 0.05) 13px, rgba(0, 212, 255, 0.05) 18px, transparent 19px),
+                radial-gradient(circle at 85% 75%, transparent 15px, rgba(255, 107, 107, 0.05) 16px, rgba(255, 107, 107, 0.05) 22px, transparent 23px),
+                /* Circuit board lines */
+                linear-gradient(0deg, transparent 49.5%, rgba(0, 212, 255, 0.08) 49.5%, rgba(0, 212, 255, 0.08) 50.5%, transparent 50.5%),
+                linear-gradient(90deg, transparent 49.5%, rgba(78, 205, 196, 0.06) 49.5%, rgba(78, 205, 196, 0.06) 50.5%, transparent 50.5%),
+                /* Grid pattern */
+                linear-gradient(0deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 
+                200px 200px,
+                250px 250px,
+                100px 100px,
+                100px 100px,
+                50px 50px,
+                50px 50px;
+            background-position: 
+                0 0,
+                100px 100px,
+                0 0,
+                0 0,
+                0 0,
+                0 0;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+            animation: engineeringFloat 20s ease-in-out infinite;
+        }
+        
+        @keyframes engineeringFloat {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(10px) translateY(-5px); }
+            50% { transform: translateX(-5px) translateY(10px); }
+            75% { transform: translateX(5px) translateY(-10px); }
+        }
+        
+        #cursor {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(45deg, #00d4ff, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 400% 400%;
+            animation: cursorGlow 2s ease infinite;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: screen;
+            transition: transform 0.1s ease;
+            box-shadow: 
+                0 0 20px rgba(0, 212, 255, 0.6),
+                0 0 40px rgba(255, 107, 107, 0.4),
+                0 0 60px rgba(78, 205, 196, 0.3);
+        }
+        
+        @keyframes cursorGlow {
+            0% { 
+                background-position: 0% 50%;
+                box-shadow: 
+                    0 0 20px rgba(0, 212, 255, 0.8),
+                    0 0 40px rgba(255, 107, 107, 0.6),
+                    0 0 60px rgba(78, 205, 196, 0.4);
+            }
+            50% { 
+                background-position: 100% 50%;
+                box-shadow: 
+                    0 0 30px rgba(255, 107, 107, 0.8),
+                    0 0 50px rgba(78, 205, 196, 0.6),
+                    0 0 70px rgba(0, 212, 255, 0.4);
+            }
+            100% { 
+                background-position: 0% 50%;
+                box-shadow: 
+                    0 0 20px rgba(0, 212, 255, 0.8),
+                    0 0 40px rgba(255, 107, 107, 0.6),
+                    0 0 60px rgba(78, 205, 196, 0.4);
+            }
+        }
+        
+        #cursor.clicking {
+            transform: scale(1.5);
+        }
+        
+        .particle {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(45deg, #00d4ff, #ff6b6b, #4ecdc4);
+            background-size: 200% 200%;
+            animation: particleShimmer 3s ease infinite;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            box-shadow: 0 0 15px currentColor;
+        }
+        
+        @keyframes particleShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .bg-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
+                    rgba(0, 212, 255, 0.2) 0%, 
+                    rgba(255, 107, 107, 0.1) 25%,
+                    rgba(78, 205, 196, 0.1) 50%,
+                    transparent 70%);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 1;
+            animation: bgPulse 4s ease infinite;
+        }
+        
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #00d4ff, #ff6b6b, #4ecdc4, #45b7d1) 1;
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            animation: headerShine 6s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes headerShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .name {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b, #4ecdc4, #45b7d1, #ffffff);
+            background-size: 400% 400%;
+            animation: nameGradient 4s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            text-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes nameGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .contact {
+            font-size: 1.1rem;
+            color: #b8b8d4;
+            font-weight: 400;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .section:hover::before {
+            left: 100%;
+        }
+        
+        .section:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(0, 212, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.4);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b, #4ecdc4);
+            background-size: 200% 200%;
+            animation: titleShimmer 3s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #00d4ff, #ff6b6b, #4ecdc4);
+            background-size: 200% 200%;
+            animation: titleShimmer 3s ease infinite;
+            border-radius: 2px;
+            box-shadow: 0 0 10px currentColor;
+        }
+        
+        @keyframes titleShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        
+        .job-info {
+            font-size: 1rem;
+            color: #b8b8d4;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .job-description {
+            margin-bottom: 25px;
+        }
+        
+        .job-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .job-description li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 8px;
+            color: #e0e0f0;
+            line-height: 1.6;
+        }
+        
+        .job-description li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-category {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(255, 107, 107, 0.1));
+            border: 2px solid;
+            border-image: linear-gradient(45deg, rgba(0, 212, 255, 0.3), rgba(255, 107, 107, 0.3)) 1;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        
+        .skill-category:hover::before {
+            animation: skillShine 1s ease;
+        }
+        
+        @keyframes skillShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+        
+        .skill-category:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.25), rgba(255, 107, 107, 0.2));
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 15px 30px rgba(0, 212, 255, 0.3),
+                0 0 20px rgba(255, 107, 107, 0.2);
+        }
+        
+        .skill-category h4 {
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .achievements-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .achievements-list li {
+            background: rgba(0, 212, 255, 0.05);
+            border-left: 4px solid #00d4ff;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .achievements-list li:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(10px);
+        }
+        
+
+        
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .bg-effect, #cursor, .particle, .print-button {
+                display: none;
+            }
+            
+            .section {
+                background: white;
+                border: 1px solid #ddd;
+                box-shadow: none;
+            }
+            
+            .name {
+                color: #000;
+                text-shadow: none;
+                -webkit-text-fill-color: black;
+            }
+            
+            .section-title {
+                color: #333;
+            }
+            
+            .contact {
+                color: #666;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="cursor"></div>
+    <div class="bg-effect"></div>
+    
+
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="name">Isaac Jones</h1>
+            <div class="contact">423-424-8437 | isaacjones23.ij@gmail.com | Chattanooga, TN</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="job-title">A.S. Mechanical Engineering</div>
+            <div class="job-info">Chattanooga State Community College | Expected 2026</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Technical Experience</h2>
+            
+            <div class="job-title">Stormwater Division Intern</div>
+            <div class="job-info">Summer 2025</div>
+            <div class="job-description">
+                <ul>
+                    <li>Inspected 5+ drainage systems and documented conditions</li>
+                    <li>Calculated surface areas for construction planning</li>
+                    <li>Created technical diagrams of drainage systems</li>
+                    <li>Collaborated with field teams to coordinate site inspections</li>
+                    <li>Presented findings to supervisors through detailed reports</li>
+                </ul>
+            </div>
+            
+            <div class="job-title">3D Systems Assistant</div>
+            <div class="job-info">Chattanooga State CC | 2023-2024</div>
+            <div class="job-description">
+                <ul>
+                    <li>Restored and maintained campus 3D printers</li>
+                    <li>Developed training materials for equipment use</li>
+                    <li>Assisted engineering students with prototyping</li>
+                    <li>Facilitated collaborative workshops for student teams</li>
+                    <li>Communicated technical solutions to diverse student groups</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Key Projects</h2>
+            
+            <div class="job-title">Galen Medical QR Code System</div>
+            <div class="job-description">
+                <ul>
+                    <li>Designed durable mounting solution adopted at multiple locations</li>
+                    <li>Engineered weather-resistant enclosures for long-term use</li>
+                </ul>
+            </div>
+            
+            <div class="job-title">Custom Business Art Pieces</div>
+            <div class="job-description">
+                <ul>
+                    <li>Created 3D-printed artistic installations for local businesses</li>
+                    <li>Designed functional decor combining aesthetics and utility</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>3D Modeling</h4>
+                    <p>Blender (mechanical & artistic)</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Fabrication</h4>
+                    <p>3D printing, prototyping</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Microsoft Office Suite</h4>
+                    <p>Word, Excel, PowerPoint, Office 365</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Communication & Collaboration</h4>
+                    <p>Team coordination, technical presentations</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Technical Analysis</h4>
+                    <p>Measurements, calculations</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Documentation</h4>
+                    <p>Technical reports, visual guides</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Achievements</h2>
+            <ul class="achievements-list">
+                <li>Deployed permanent QR code solution at medical facilities</li>
+                <li>Restored multiple 3D printers to full functionality</li>
+                <li>Bridged technical and creative needs for business clients</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Cursor tracking and effects
+        const cursor = document.getElementById('cursor');
+        const bgEffect = document.querySelector('.bg-effect');
+        const particles = [];
+        let mouseX = 0, mouseY = 0;
+        let isIdle = true;
+        let idleTimer;
+        
+        // Create particles
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            document.body.appendChild(particle);
+            particles.push({
+                element: particle,
+                x: window.innerWidth / 2,
+                y: window.innerHeight / 2,
+                targetX: window.innerWidth / 2,
+                targetY: window.innerHeight / 2,
+                delay: i * 50
+            });
+        }
+        
+        function updateCursor(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = mouseX - 10 + 'px';
+            cursor.style.top = mouseY - 10 + 'px';
+            
+            // Update background effect
+            const x = (mouseX / window.innerWidth) * 100;
+            const y = (mouseY / window.innerHeight) * 100;
+            bgEffect.style.setProperty('--x', x + '%');
+            bgEffect.style.setProperty('--y', y + '%');
+            
+            isIdle = false;
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => { isIdle = true; }, 100);
+        }
+        
+        function animateParticles() {
+            particles.forEach((particle, index) => {
+                if (isIdle) {
+                    // Idle animation - extend particles
+                    const angle = (Date.now() / 1000 + index * 0.5) % (Math.PI * 2);
+                    const radius = 50 + Math.sin(Date.now() / 1000 + index) * 20;
+                    particle.targetX = mouseX + Math.cos(angle) * radius;
+                    particle.targetY = mouseY + Math.sin(angle) * radius;
+                } else {
+                    // Following cursor
+                    particle.targetX = mouseX;
+                    particle.targetY = mouseY;
+                }
+                
+                // Smooth movement
+                particle.x += (particle.targetX - particle.x) * 0.1;
+                particle.y += (particle.targetY - particle.y) * 0.1;
+                
+                particle.element.style.left = particle.x - 2 + 'px';
+                particle.element.style.top = particle.y - 2 + 'px';
+                
+                // Connect particles when idle
+                if (isIdle && index > 0) {
+                    const prevParticle = particles[index - 1];
+                    const distance = Math.sqrt(
+                        Math.pow(particle.x - prevParticle.x, 2) + 
+                        Math.pow(particle.y - prevParticle.y, 2)
+                    );
+                    
+                    if (distance < 100) {
+                        particle.element.style.boxShadow = 
+                            `0 0 ${100 - distance}px rgba(0, 212, 255, ${(100 - distance) / 200})`;
+                    } else {
+                        particle.element.style.boxShadow = 'none';
+                    }
+                } else {
+                    particle.element.style.boxShadow = 'none';
+                }
+            });
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        document.addEventListener('mousemove', updateCursor);
+        document.addEventListener('mousedown', () => cursor.classList.add('clicking'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
+        
+        // Initialize
+        animateParticles();
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add subtle animations on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.1s';
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        });
+        
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // CSS Animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
